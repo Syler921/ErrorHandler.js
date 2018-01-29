@@ -1,12 +1,11 @@
 import 'whatwg-fetch';
-import getBaseUrl from './baseUrl';
+import getPlatformInformation from './ErrorHandler';
 
-const baseUrl = getBaseUrl();
 
-export function getUsers() {
-  return get('users');
+export function getPlatformInfo() {
+  getPlatformInformation();
 }
-
+/*
 export function deleteUser(id) {
   return del(`users/${id}`);
 }
@@ -31,3 +30,4 @@ function onSuccess(response) {
 function onError(error) {
   console.log(error); // eslint-disable-line no-console
 }
+*/

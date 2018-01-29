@@ -1,9 +1,10 @@
 import './index.css';
 
-import {getUsers, deleteUser} from './api/userApi';
+import {getPlatformInfo} from './api/ErrorHandlerAPI';
 
+getPlatformInfo();
 // Populate table of users via API call.
-getUsers().then(result => {
+/*getUsers().then(result => {
   let usersBody = "";
 
   result.forEach(user => {
@@ -32,3 +33,4 @@ getUsers().then(result => {
     };
   });
 });
+*/
