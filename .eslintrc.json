@@ -1,9 +1,9 @@
 {
   "root": true,
   "extends": [
-    "eslint:recommended",
+   /* "eslint:recommended",
     "plugin:import/errors",
-    "plugin:import/warnings"
+    "plugin:import/warnings"*/
   ],
   "parserOptions": {
     "ecmaVersion": 7,

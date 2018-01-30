@@ -3,6 +3,9 @@ import './index.css';
 import {getPlatformInfo} from './api/ErrorHandlerAPI';
 
 getPlatformInfo();
+//dasdas.prop
+//tedadsa.tes
+//dasdas.tess
 // Populate table of users via API call.
 /*getUsers().then(result => {
   let usersBody = "";

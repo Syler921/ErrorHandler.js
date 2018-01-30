@@ -6,7 +6,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 export default {
   debug: true,
-  devtool: 'source-map',
+  //devtool: 'source-map',
   noInfo: false,
   entry: {
     vendor: path.resolve(__dirname, 'src/vendor'),
