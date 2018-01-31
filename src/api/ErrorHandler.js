@@ -17,34 +17,34 @@ function addEvent(evnt, elem, func) {
   }
 }
 
-function errorListener() {
+function errorListener(errorMessageObject) {
   console.log('errorListenerFired')
   var jsError = window.onerror;
   console.log('test1------')
-  return function(message, url, line, column, error) {
-    console.log('test------2------')
-    if (typeof errorHandlerPreviousError !== "undefined" && errorHandlerPreviousError === message) {
+  return function(errorMessageObject) {
+    console.log('test------2------',errorMessageObject)
+    if (typeof errorHandlerPreviousError !== "undefined" && errorHandlerPreviousError === errorMessageObject.message ) {
       console.log('test------3------',typeof(errorHandlerPreviousError))
-      console.log('test------4------',typeof(message))
+      console.log('test------4------',typeof(errorMessageObject.message))
       return;
     }
-    errorHandlerPreviousError = message;
-    var data = function(message, url, line, column, error) {
+    errorHandlerPreviousError = errorMessageObject.message;
+    var data = function(errorMessageObject) {
         errorHandlerCount++;
-        console.warn('errorHandlerCount ++')
+
         if(errorHandlerCount > 3){
           return;
         }
 
       var errorObj = {
-        message: message,
-        url: url,
-        line: line,
-        column: column
+        message: errorMessageObject.message,
+        url: errorMessageObject.filename,
+        line: errorMessageObject.lineno,
+        column: errorMessageObject.colno
       };
 
-      if(error && error.stack){
-        errorObj.stack =  error.stack.toString();
+      if(errorMessageObject.error && errorMessageObject.error.stack){
+        errorObj.stack =  errorMessageObject.error.stack.toString();
       }
 
       if(typeof platform !== "undefined"){
@@ -66,12 +66,12 @@ function errorListener() {
       return 'data=' + encodeURIComponent(Open.objectToString(errorObj));
       var errorContent = ['<table>'];
       //for (var i = 0; i < arguments.length; i++) {test1-----
-        errorContent.push('<tr><th>Message</th><td>' + message + '</td></tr>');
-        errorContent.push('<tr><th>Url</th><td>' + url + '</td></tr>');
-        errorContent.push('<tr><th>Line</th><td>' + line + '</td></tr>');
-        errorContent.push('<tr><th>Column</th><td>' + column + '</td></tr>');
-        if(error && error.stack){
-          errorContent.push('<tr><th>Stack</th><td>' + error.stack.toString() + '</td></tr>');
+        errorContent.push('<tr><th>Message</th><td>' + errorMessageObject.message + '</td></tr>');
+        errorContent.push('<tr><th>Url</th><td>' + errorMessageObject.filename + '</td></tr>');
+        errorContent.push('<tr><th>Line</th><td>' + errorMessageObject.lineno + '</td></tr>');
+        errorContent.push('<tr><th>Column</th><td>' + errorMessageObject.colno + '</td></tr>');
+        if(errorMessageObject.error && errorMessageObject.error.stack){
+          errorContent.push('<tr><th>Stack</th><td>' + errorMessageObject.error.stack.toString() + '</td></tr>');
         }
 
 
@@ -107,7 +107,7 @@ function errorListener() {
       return 'data=' + encodeURIComponent(errorContent.join(''));
     }
     console.log('after returnm 1 ')
-    if (jsError) { jsError(message, url, line, column, error); }
+    if (jsError) { jsError(errorMessageObject); }
     console.log('jsError 1 ')
     console.log('errorListenerFired post ????')
     var i = Open.connection.createObject();
@@ -117,9 +117,9 @@ function errorListener() {
     console.log('post 2 ')
     i.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     console.log('post 3 ')
-    i.send(data(message, url, line, column, error)); return false;
+    i.send(data(errorMessageObject)); return false;
     console.log('post 4 ')
-  }();
+  }(errorMessageObject);
 }
 
 export default function addWindowErrorListener() {
