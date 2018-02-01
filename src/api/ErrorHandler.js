@@ -61,7 +61,7 @@ function buildEmailMessage(errorMessageObject){
 
     console.log('test 55555 return ------ ', encodeURIComponent(Open.objectToString(errorObj)))
     return 'data=' + encodeURIComponent(Open.objectToString(errorObj));
-    var errorContent = ['<table>'];
+   /* var errorContent = ['<table>'];
     //for (var i = 0; i < arguments.length; i++) {test1-----
       errorContent.push('<tr><th>Message</th><td>' + errorMessageObject.message + '</td></tr>');
       errorContent.push('<tr><th>Url</th><td>' + errorMessageObject.filename + '</td></tr>');
@@ -70,10 +70,6 @@ function buildEmailMessage(errorMessageObject){
       if(errorMessageObject.error && errorMessageObject.error.stack){
         errorContent.push('<tr><th>Stack</th><td>' + errorMessageObject.error.stack.toString() + '</td></tr>');
       }
-
-
-
-
     //}
 
     if (errorHandlerErrorAdditionalInfo !== null && typeof (errorHandlerErrorAdditionalInfo) !== 'undefined' && errorHandlerErrorAdditionalInfo !== '') {
@@ -100,47 +96,31 @@ function buildEmailMessage(errorMessageObject){
       // }
     // }
     errorContent.push('</table>');
-    console.warn('return 1 ','data=' + encodeURIComponent(errorContent.join('')))
-    return 'data=' + encodeURIComponent(errorContent.join(''));
+    return 'data=' + encodeURIComponent(errorContent.join(''));*/
 
 }
 
 function errorListener(errorMessageObject) {
-  console.log('errorListenerFired')
+  console.log('errorMessageObject======= ',errorMessageObject)
   var jsError = window.onerror;
-  console.log('test1------')
 
-    console.log('test------2------',errorMessageObject)
     if (typeof errorHandlerPreviousError !== "undefined" && errorHandlerPreviousError === errorMessageObject.message ) {
-      console.log('test------3------',typeof(errorHandlerPreviousError))
-      console.log('test------4------',typeof(errorMessageObject.message))
       return;
     }
     errorHandlerPreviousError = errorMessageObject.message;
 
-    console.log('after returnm 1 ')
     if (jsError) { jsError(errorMessageObject); }
-    console.log('jsError 1 ')
-    console.log('errorListenerFired post ????')
+
     var i = Open.connection.createObject();
     i.open('POST', '/open/errorHandler.asp', 1);
-    console.log('post 1 ')
     i.setRequestHeader('CharSet', 'UTF-8');
-    console.log('post 2 ')
     i.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    console.log('post 3 ')
     i.send(buildEmailMessage(errorMessageObject)); return false;
-    console.log('post 4 ')
+
 
 }
 
 export default function addWindowErrorListener() {
-  alert(platform.name)
-  console.log('test---------',platform.name      ); // 'IE'
-  console.log('test---------',platform.version    ); // '10.0'
-  console.log('test---------',platform.layout   ); // 'Trident'
-  console.log('test---------',platform.os      ); // 'Windows Server 2008 R2 / 7 x64'
-  console.log('test---------',platform.description);
 
   var errorHandlerErrorAdditionalInfo = '';
   var errorHandlerCount = 0;
