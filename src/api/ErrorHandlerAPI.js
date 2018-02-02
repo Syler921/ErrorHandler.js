@@ -1,10 +1,10 @@
-import 'whatwg-fetch';
-import addWindowErrorListener from './ErrorHandler';
+//import 'whatwg-fetch';
+//import addWindowErrorListener from './ErrorHandler';
 
 
-export function getPlatformInfo() {
-  addWindowErrorListener();
-}
+//export function getPlatformInfo() {
+//  addWindowErrorListener();
+//}
 /*
 export function deleteUser(id) {
   return del(`users/${id}`);

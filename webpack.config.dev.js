@@ -3,16 +3,19 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 export default {
   debug: true,
-  //devtool: 'inline-source-map',
+  devtool: 'source-map',
   noInfo: false,
   entry: [
-    path.resolve(__dirname, 'src/index')
+    path.resolve(__dirname, 'src/api/ErrorHandler.js')
   ],
   target: 'web',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    library: "ErrorHandler",
+    libraryTarget: "var"
+    //libraryExport:"ErrorHandler"
   },
   plugins: [
     // Create HTML file that includes reference to bundled JS.
