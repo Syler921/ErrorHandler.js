@@ -33,18 +33,18 @@ var ErrorHandler = {
       errorObj.stack =  errorMessageObject.error.stack.toString();
     }
 
-    if(typeof platform !== "undefined"){
+    if(typeof ErrorHandler.platform !== "undefined"){
       errorObj.platform = {};
       // on IE10 x86 platform preview running in IE7 compatibility mode on Windows 7 64 bit edition
-      errorObj.platform.name = platform.name; // 'IE'
-      errorObj.platform.version = platform.version; // '10.0'
-      errorObj.platform.layout = platform.layout; // 'Trident'
-      errorObj.platform.osArchitecture = platform.os.architecture; // 'Windows Server 2008 R2 / 7 x64'
-      errorObj.platform.osFamily = platform.os.family; // 'Windows Server 2008 R2 / 7 x64'
-      errorObj.platform.osVersion = platform.os.version; // 'Windows Server 2008 R2 / 7 x64'
-      errorObj.platform.description = platform.description; // 'IE 10.0 x86 (platform preview; running in IE 7 mode) on Windows Server 2008 R2 / 7 x64'
-      errorObj.platform.product = platform.product; // 'iPad'
-      errorObj.platform.manufacturer = platform.manufacturer; // 'Apple'
+      errorObj.platform.name =            ErrorHandler.platform.name; // 'IE'
+      errorObj.platform.version =         ErrorHandler.platform.version; // '10.0'
+      errorObj.platform.layout =          ErrorHandler.platform.layout; // 'Trident'
+      errorObj.platform.osArchitecture =  ErrorHandler.platform.os.architecture; // 'Windows Server 2008 R2 / 7 x64'
+      errorObj.platform.osFamily =        ErrorHandler.platform.os.family; // 'Windows Server 2008 R2 / 7 x64'
+      errorObj.platform.osVersion =       ErrorHandler.platform.os.version; // 'Windows Server 2008 R2 / 7 x64'
+      errorObj.platform.description =     ErrorHandler.platform.description; // 'IE 10.0 x86 (platform preview; running in IE 7 mode) on Windows Server 2008 R2 / 7 x64'
+      errorObj.platform.product =         ErrorHandler.platform.product; // 'iPad'
+      errorObj.platform.manufacturer =    ErrorHandler.platform.manufacturer; // 'Apple'
     }
 
     errorObj.timeStamp = Date.now();
